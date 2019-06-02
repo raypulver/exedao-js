@@ -101,7 +101,7 @@ class ExeDaoClient {
       } [ bytecode ])
     }, o));
   }
-  addFunctions(functionAddress, isCall, funcSigs) {
+  addFunctions(functionAddress, isCall, funcSigs, o) {
     o = this.addFields(o);
     return this.sendTransaction(Object.assign({
       data: abi.encodeFunctionCall({
@@ -119,7 +119,7 @@ class ExeDaoClient {
       }, [ functionAddress, isCall, funcSigs ])
     }, o));
   }
-  removeFunction(funcSigs) {
+  removeFunction(funcSigs, o) {
     o = this.addFields(o);
     return this.sendTransaction(Object.assign({
       data: abi.encodeFunctionCall({
@@ -129,6 +129,75 @@ class ExeDaoClient {
           type: 'bytes4[]'
         }]
       }, [ funcSigs ])
+    }, o));
+  }
+  submitOrVote(proposalHash, vote, o) {
+    o = this.addFields(o);
+    return this.sendTransaction(Object.assign({
+      data: abi.encodeFunctionCall({
+        name: 'submitOrVote',
+        inputs: [{
+          name: 'proposalHash',
+          type: 'bytes32'
+        }, {
+          name: 'vote',
+          type: 'bool'
+        }]
+      }, [ proposalHash, vote ])
+    }, o));
+  }
+  burnShares(amount, o) {
+    o = this.addFields(o);
+    return this.sendTransaction(Object.assign({
+      data: abi.encodeFunctionCall({
+        name: 'burnShares',
+        inputs: [{
+          name: 'amount',
+          type: 'uint64'
+        }]
+      }, [ amount ])
+    }, o));
+  }
+  mintShares(recipient, amount, o) {
+    o = this.addFields(o);
+    return this.sendTransaction(Object.assign({
+      data: abi.encodeFunctionCall({
+        name: 'mintShares',
+        inputs: [{
+          name: 'recipient',
+          type: 'address'
+        }, {
+          name: 'amount',
+          type: 'uint64'
+        }]
+      }, [ recipient, amount ])
+    }, o));
+  }
+  cancelProposal(proposalHash, o) {
+    o = this.addFields(o);
+    return this.sendTransaction(Object.assign({
+      data: abi.encodeFunctionCall({
+        name: 'cancelProposal',
+        inputs: [{
+          name: 'proposalHash',
+          type: 'bytes32'
+        }]
+      }, [ proposalHash ])
+    }, o));
+  }
+  setProposalRequirement(funcSig, requirement, o) {
+    o = this.addFields(o);
+    return this.sendTransaction(Object.assign({
+      data: abi.encodeFunctionCall({
+        name: 'setProposalRequirement',
+        inputs: [{
+          name: 'funcSig',
+          type: 'bytes4'
+        }, {
+          name: 'requirement',
+          type: 'uint8'
+        }]
+      }, [ funcSig, requirement ])
     }, o));
   }
 }
