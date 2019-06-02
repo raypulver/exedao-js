@@ -21,6 +21,9 @@
   },
   "homepage": "https://github.com/raypulver/exedao-js#readme",
   "dependencies": {
-    "kool-makerpccall": "^0.1.0"
+    "ethereumjs-tx": "^1.3.7",
+    "ethereumjs-util": "^6.1.0",
+    "kool-makerpccall": "^0.1.0",
+    "web3-eth-abi": "^1.0.0-beta.55"
   }
 }
